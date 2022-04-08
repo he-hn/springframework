@@ -7,8 +7,8 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/main/resources/spring/root/ch01_component_scan.xml</config>
 		<config>src/main/resources/spring/dispatcher/ch01_component_scan.xml</config>
+		<config>src/main/resources/spring/dispatcher/ch02_component_scan.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
