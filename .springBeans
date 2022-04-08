@@ -8,9 +8,11 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/resources/spring/dispatcher/ch01_component_scan.xml</config>
-		<config>src/main/resources/spring/dispatcher/ch02_component_scan.xml</config>
+		<config>src/main/resources/spring/dispatcher/ch01_resources.xml</config>
+		<config>src/main/resources/spring/dispatcher/ch01_viewresolver.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/spring/root/ch01_component_scan.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
