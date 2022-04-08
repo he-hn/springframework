@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
 
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!-- ContextLoaderListener가 Root WebApplicationContext를 생성할 때 사용할 spring 설정 파일의 위치 지정-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<!-- <param-value>/WEB-INF/spring/root/*.xml</param-value> -->
+		<param-value>classpath:spring/root/*.xml</param-value>
 	</context-param>
 	
-	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<!-- 웹 애플리케이션이 시작(배치, deployment)될 때와 종료(해제, undeployment)될 때 Root WebApplicationContext를 생성하고 제거하기 위해 ContextLoaderListener 설정-->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- Processes application requests -->
+	<!-- 클라이언트의 요청을 처리하는 DispatcherServlet 설정 -->
 	<servlet>
-		<servlet-name>appServlet</servlet-name>
+		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- DispatcherServlet이 WebApplicationContext를 생성할 때 사용할 Spring 설정 파일의 위치 지정 -->
+
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+			<!-- <param-value>/WEB-INF/spring/appServlet/*.xml</param-value> -->
+			<param-value>classpath:spring/dispatcher/*.xml</param-value>
 		</init-param>
+		<!-- 배치할 때 DispatcherServlet 객체를 미리 생성하도록 설정 -->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
 	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
+		<servlet-name>dispatcher</servlet-name>
+		<!-- hppt://localhost:8080/webapp/... 이런 URL로 요청할 경우 모두 처리 -->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>
