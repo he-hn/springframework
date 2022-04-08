@@ -1,4 +1,4 @@
-package com.mycompany.webapp;
+package com.mycompany.webapp.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	public HomeController() {
+		logger.info("실행");
+	}
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
