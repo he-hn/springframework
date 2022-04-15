@@ -1,4 +1,5 @@
-<!-- <%@ page contentType="text/html; charset=UTF-8"%> -->
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,12 +8,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/webapp/resources/css/app.css" />
 </head>
 <body>
@@ -23,7 +21,15 @@
 				<%-- <img src="<%=request.getContextPath()%>/resources/images/logo-spring.png" width="30" height="30" class="d-inline-block align-top"> Spring --%>
 			</a>
 			<div>
-				<a href="#" class="btn btn-success btn-sm">로그인</a>
+				<c:if test="${sessionMid == null}">
+					<a href="${pageContext.request.contextPath}/ch08/login" class="btn btn-success btn-sm">로그인</a>
+					<%-- <a href="/webapp/ch08/login" class="btn btn-success btn-sm">로그인</a> 위와 똑같다.--%>
+				</c:if>
+				
+				<c:if test="${sessionMid != null}">
+					<b class="text-white mr-2">User ID: ${sessionMid}</b>
+					<a href="${pageContext.request.contextPath}/ch08/logout" class="btn btn-success btn-sm">로그아웃</a>
+				</c:if>
 			</div>
 			
 		</nav>
