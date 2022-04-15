@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- bean의 id는 객체를 생성하고 하고 나서 부여한 이름. 객체를 이름으로 관리한다. -->
+	
+	<!-- 모든 서블릿 버전에서 사용 가능한 방법 --> 
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean> -->
+	
+	<!-- 서블릿 3.0 이상 버전에서만 사용 가능한 방법 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
+	
+</beans>
+
+

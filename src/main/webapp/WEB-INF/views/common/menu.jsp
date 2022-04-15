@@ -49,4 +49,11 @@
 			<a href="${pageContext.request.contextPath}/ch08/content" class="text-white">Controller/Session Support</a>
 		</h6>
 	</li>
+	</li>
+		<li class="nav-item mb-2">
+		<h6 class="text-white">
+			<span class="mr-2">ch09.</span>
+			<a href="${pageContext.request.contextPath}/ch09/content" class="text-white">Controller/FileUpload & FileDownload</a>
+		</h6>
+	</li>
 </ul>				
