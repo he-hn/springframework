@@ -12,7 +12,7 @@
 				Form 태그를 이용한 FileUpload
 			</div>
 			<div class="card-body">
-				<form method="post" enctype="multipart/form-data" action="fileupload"> <!-- enctype="multipart/form-data" 을 사용하려면 무조건 post 여야 한다 -->
+				<form method="post" enctype="multipart/form-data" action="fileupload"> <%-- enctype="multipart/form-data" 을 사용하려면 무조건 post 여야 한다 --%>
 					<div class="form-group">
 						<label for="title">File Title</label> 
 						<input type="text" class="form-control" id="title" name="title" placeholder="제목">
@@ -65,14 +65,19 @@
 	
 		<div class="card">
 			<div class="card-header">
-				File Downlaod
+				File Download
 			</div>
 			<div class="card-body">
-				<a href="filedownload?fileNo=1"
-				   class="btn btn-info btn-sm">파일 다운로드</a>
+				<a href="filedownload?fileNo=1" class="btn btn-info btn-sm" onclick="filedownload(1)">파일 다운로드</a>
 				<hr/>
-				<img src="filedownload?fileNo=1" width="200px"/>
+				<img id="downloadImg" width="200px"/>
 			</div>
+			
+			<script>
+				function filedownload(fileNo) {
+					$("#downloadImg").attr("src", "filedownload?fileNo=" + fileNo);
+				}
+			</script>		
 		</div>
 	</div>
 </div>

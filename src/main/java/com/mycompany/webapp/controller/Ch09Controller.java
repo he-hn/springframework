@@ -1,11 +1,17 @@
 package com.mycompany.webapp.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.net.URLEncoder;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,7 +46,7 @@ public class Ch09Controller {
 		
 		//받은 파일을 서버 파일 시스템에 저장할 때
 		String saveFilename = new Date().getTime() + "-" + attach.getOriginalFilename(); //시간 정보를 넣고, '-'와 파일 이름을 넘김으로써 동일한 이름의 파일이 올라가도 덮어쓰기가 되지 않도록 한다.
-		File file = new File("C:/Temp/uploadfiles/" + saveFilename); //브라우저가 업로한 파일을 서버쪽에 어디에 저장할지 정해주기 위해서 경로를 지정한다
+		File file = new File("C:/Temp/uploadfiles/" + saveFilename); //브라우저가 업로드한 파일을 서버쪽에서 어디에 저장할지 정해주기 위해서 경로를 지정한다
 		attach.transferTo(file); //파일을 저장할 때 transferTo를 이용
 
 		return "redirect:/ch09/content";
@@ -101,5 +107,32 @@ public class Ch09Controller {
 		String json = jsonObject.toString();
 		
 		return json;
+	}
+	
+	@RequestMapping("/filedownload") 
+	public void filedownload(int fileNo, HttpServletResponse response, @RequestHeader("User-Agent") String userAgent) throws Exception { //view 이름의 return 해왔기 때문 String 타입이었다. 이것을 void로 바꾼다는 것은 직접 응답을 만들어 내겠다는 것을 의미한다. view 를 return 하는 것이 아니라 응답을 return 한다
+		//DB에서 가져올 정보
+		String contentType = "img/jpg";
+		String originalFilename = "사진6.jpg";
+		String saveFilename = "1650010429275-photo6.jpg";
+		
+		//응답 내용의 데이터 타입을 응답 헤더에 추가
+		response.setContentType(contentType);
+		
+		//다운로드할 파일명을 헤더에 추가
+		if(userAgent.contains("Trident") || userAgent.contains("MSIE")) { //인터넷 익스플로러 11 || 10 이하
+			//IE 브라우저일 경우
+			originalFilename = URLEncoder.encode(originalFilename, "UTF-8");
+		} else {
+			//크롬, 엣지, 사파리일 경우
+			originalFilename = new String(originalFilename.getBytes("UTF-8"), "ISO-8859-1"); //직접 바이트 배열을 얻어내고, 얻어낸 것을 다시 ISO-8859-1로 표현한다
+		}
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + originalFilename + "\"");
+
+		//파일 데이터를 응답 본문에 싣기
+		File file = new File("C:/Temp/uploadfiles/" + saveFilename);
+		if(file.exists()) {
+			FileCopyUtils.copy(new FileInputStream(file), response.getOutputStream());
+		}
 	}
 }

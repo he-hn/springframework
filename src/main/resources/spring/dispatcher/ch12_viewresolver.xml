@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"> <!-- 먼저 해석하도록 한다. 못찾으면 ch01.viewResolver 에 있는 InternalResourceViewResolver 를 실행한다. 순서를 지정했기 때문. -->
+		<property name="order" value="0" />
+	</bean>
+
+</beans>

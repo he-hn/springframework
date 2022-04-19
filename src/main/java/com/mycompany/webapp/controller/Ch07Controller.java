@@ -88,7 +88,7 @@ public class Ch07Controller {
 		ServletContext application = request.getServletContext(); //ServletContext 어플리케이션 객체이다 
 		application.setAttribute("applicationScopeValue", "한여름");
 		
-		//객체 생성후 session 범위에 객체 저장
+		//객체 생성후 application 범위에 객체 저장
 		Integer counter = ++count;
 		application.setAttribute("counter", counter);
 		
@@ -121,6 +121,7 @@ public class Ch07Controller {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("board", board);
 		modelAndView.setViewName("ch07/boardDetail");
+		log.info("실행");
 		return modelAndView;
 	}
 	
@@ -128,7 +129,8 @@ public class Ch07Controller {
 	@GetMapping("/modelArgument")
 	public String modelArgument(Model model) { //model 선언
 		Ch07Board board = new Ch07Board(1, "제목1", "내용1", "글쓴이1", new Date()); //값 전달
-		model.addAttribute("board", board); //attribute 추가
+		model.addAttribute("board", board); //attribute 추가 
+		log.info("실행");
 		return "ch07/boardDetail";
 	}
 	

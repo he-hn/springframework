@@ -24,6 +24,12 @@
 			<!-- <param-value>/WEB-INF/spring/appServlet/*.xml</param-value> -->
 			<param-value>classpath:spring/dispatcher/*.xml</param-value>
 		</init-param>
+		<!-- 404일 경우 500에러로 발생 -->
+		<init-param>
+			<param-name>throwExceptionIfNoHandlerFound</param-name> <!-- 요청 매핑 메소드를 못 찾았을 경우에 강제로 발생 -->
+			<param-value>true</param-value>
+		</init-param>
+		
 		<!-- 배치할 때 DispatcherServlet 객체를 미리 생성하도록 설정 -->
 		<load-on-startup>1</load-on-startup>
 		<!-- Servlet 3.0에서 지원하는 multipart/form-data 파싱 기능을 위한 설정 -->
@@ -61,4 +67,13 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- 404 에러 처리 -->
+	<!--
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/ch10/404.jsp</location>
+	</error-page>
+	-->
+	 
+	 
 </web-app>

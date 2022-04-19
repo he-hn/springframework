@@ -30,7 +30,7 @@ public class Ch08Controller {
 	@GetMapping(value="/saveData", produces="application/json; charset=UTF-8") //value 값이 나오는 mapping 다음에 method는 view를 return 하는 것이 아니라 응답 내용을 받는 것이다
 	@ResponseBody //리턴 값을 받는 본문이 필요하다. 본문이 없으면 안된다.
 	public String saveData(String name, HttpSession session) {
-		log.info("실행");
+		log.info("실행"); 
 		
 		session.setAttribute("name", name); //setAttibutes는 저장
 		
@@ -67,6 +67,7 @@ public class Ch08Controller {
 		if(mid.equals("spring") && mpassword.equals("12345")) {
 			//로그인 성공시 세션에 회원 아이디를 저장
 			session.setAttribute("sessionMid", mid);
+			log.info("mid: " + mid);
 		}
 		return "redirect:/ch08/content";
 	}
@@ -85,7 +86,7 @@ public class Ch08Controller {
 			HttpSession session,
 			@SessionAttribute String sessionMid, 
 			@SessionAttribute("sessionMid") String mid) { //세션에 저장된 이름이 매개변수의 이름과 같다면 세션에 저장된 이름을 넣어주지 않아도 되지만 같지 않다면 넣어줘야 한다.
-		
+	
 		String memberId = (String) session.getAttribute("sessionMid");
 		
 		log.info("memberId: " + memberId);

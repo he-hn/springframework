@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%> <%-- 페이지 인코딩은 기본적으로 charset을 따라가기 때문에 생략해도 된다 --%>
 
-<%@ include file="/WEB-INF/views/common/header.jsp" %> <!-- include는 url로 접근 하는 것이 아닌 애플리케이션 내부 경로로 접근해야 한다 -->
+<%@ include file="/WEB-INF/views/common/header.jsp" %> <%-- include는 url로 접근 하는 것이 아닌 애플리케이션 내부 경로로 접근해야 한다 --%>
 
 <div class="card m-2">
 	<div class="card-header">
@@ -14,7 +14,7 @@
 
 <div class="card m-2">
 	<div class="card-header">
-		객체 저장 범위(~.jps -> .java -> ~.class)
+		객체 저장 범위(~.jsp -> .java -> ~.class)
 	</div>
 	<div class="card-body">	
 		 <p>request 범위 객체 값: <%=request.getAttribute("requestScopeValue")%></p>
@@ -30,12 +30,14 @@
  		 	member's job: ${member.job} <br/>
  		 	member's city: ${member.city.name} <br/>
 	 	</p> <%-- name.property 형태와 같은 정보도 담고 있다 --%>
+	 	<hr/>
+	 
 	 	<p>
  		 	session 범위 객체 값: ${sessionScopeValue} <br/>
  		 	member's name: ${member2.name} <br/>
  		 	member's age: ${member2.age} <br/>
  		 	member's job: ${member2.job} <br/>
- 		 	member's city: ${member.city.name} <br/>
+ 		 	member's city: ${member2.city.name} <br/>
 	 	</p>
 	 	<hr />
 		 

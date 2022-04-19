@@ -13,7 +13,7 @@
 				세션 원리: JSESSIONID 쿠키
 			</div>
 			<div class="card-body">
-				<p>서버: 세션 객체 생성->JSESSIONID 쿠기 발생</p>
+				<p>서버: 세션 객체 생성->JSESSIONID 쿠키 발생</p>
 				<p>브라우저: JSESSIONID 쿠키 전송 -> 세션 객체 찾음 -> 세션 객체 이용</p>
 				<a href="javascript:saveData()" class="btn btn-info btn-sm">세션에 데이터 저장</a>
 				<a href="javascript:readData()" class="btn btn-info btn-sm">세션에 데이터 읽기</a>
