@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 기본 생성자를 이용해서 객체 생성 -->
+	<bean id="ch13Service2_1" class="com.mycompany.webapp.service.Ch13Service2CreateByXml"/> <!-- 객체가 만들어진다 -->
+	<bean id="ch13Dao2" class="com.mycompany.webapp.dao.Ch13Dao2CreateByXml"/> <!-- 객체가 만들어진다 -->
+
+	<!-- 정적 메소드를 이용해서 객체 생성 -->
+	<bean id="ch13Service2_2" class="com.mycompany.webapp.service.Ch13Service2CreateByXml" 
+		factory-method="getInstance1" /> <!-- xml에서는 import 개념이 없기 때문에 전체 경로가 필요하다 -->
+		
+	<!-- 관리 객체의 인스턴스 메소드를 이용해서 객체 생성 -->
+	<bean id="ch13Service2_3" class="com.mycompany.webapp.service.Ch13Service2CreateByXml" 
+		factory-bean="ch13Service2_1" factory-method="getInstance2" /> <!-- factory-bean이 들어가면 ch13Service2_1 객체의 인스턴스 메소드 임을 의미히나다 -->
+	
+	<!-- 생성자 주입 -->
+	<bean id="ch13Service6_1" class="com.mycompany.webapp.service.Ch13Service6InjectByXml" >
+		<constructor-arg ref="ch13Dao2"/>
+		<constructor-arg value="데이터"/>
+	</bean>
+	
+	<!-- Setter 주입 -->
+	<bean id="ch13Service6_2" class="com.mycompany.webapp.service.Ch13Service6InjectByXml" >
+		<property name="dao" ref="ch13Dao2"/>
+		<property name="str" value="데이터"/>
+	</bean>
+	
+	<bean id="ch13Service6_3" class="com.mycompany.webapp.service.Ch13Service6InjectByXml" 
+		p:dao-ref="ch13Dao2" p:str="데이터"/>
+		
+	<!-- 컬렉션 타입 주입 -->
+	<bean id="ch13Service6_4" class="com.mycompany.webapp.service.Ch13Service6InjectByXml">
+		<property name="collection1">
+			<list>
+				<value>데이터</value>
+				<ref bean="ch13Dao2" />
+			</list>
+		</property>
+		
+		<property name="collection2">
+			<set>
+				<value>데이터</value>
+				<ref bean="ch13Dao2" />
+			</set>
+		</property>
+		
+		<property name="collection3">
+			<map>
+				<entry key="key1" value="데이터" />
+				<entry key="key2" value-ref="ch13Dao2" />
+			</map>
+		</property>
+		
+		<property name="collection4">
+			<props>
+				<prop key="key1">데이터1</prop>
+				<prop key="key2">데이터2</prop>
+			</props>
+		</property>
+	</bean>
+</beans>
