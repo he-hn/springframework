@@ -61,7 +61,7 @@
 		</init-param>
 	</filter>
 	
-	<!-- 클라이언트가 http://localhost:8080/webapp/*... 이렇게 요청했을 때 CharacterEncodingFilter 처리-->
+	<!-- 클라이언트가 http://localhost:8080/webapp/* 이렇게 요청했을 때 CharacterEncodingFilter 처리-->
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -74,6 +74,20 @@
 		<location>/WEB-INF/views/ch10/404.jsp</location>
 	</error-page>
 	-->
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Spring Security 로그인 중복 방지를 위해 설정 -->
+	<listener>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
 	 
 	 
 </web-app>

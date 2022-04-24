@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- 기본 생성자를 이용해서 객체 생성 -->
 	<bean id="ch13Service2_1" class="com.mycompany.webapp.service.Ch13Service2CreateByXml"/> <!-- 객체가 만들어진다 -->
@@ -14,7 +16,7 @@
 		
 	<!-- 관리 객체의 인스턴스 메소드를 이용해서 객체 생성 -->
 	<bean id="ch13Service2_3" class="com.mycompany.webapp.service.Ch13Service2CreateByXml" 
-		factory-bean="ch13Service2_1" factory-method="getInstance2" /> <!-- factory-bean이 들어가면 ch13Service2_1 객체의 인스턴스 메소드 임을 의미히나다 -->
+		factory-bean="ch13Service2_1" factory-method="getInstance2" /> <!-- factory-bean이 들어가면 ch13Service2_1 객체의 인스턴스 메소드 임을 의미한다 -->
 	
 	<!-- 생성자 주입 -->
 	<bean id="ch13Service6_1" class="com.mycompany.webapp.service.Ch13Service6InjectByXml" >
@@ -60,5 +62,16 @@
 				<prop key="key2">데이터2</prop>
 			</props>
 		</property>
+	</bean>
+	
+	<!-- Properties 값 관리 설정 -->
+	<context:property-placeholder location="classpath:properties/*.properties"/>
+	
+	<!-- Properties 값 주입 -->
+	<bean id="ch13Service7" class="com.mycompany.webapp.service.Ch13Service7InjectPropByXml">
+		<property name="prop1" value="${service.prop1}"></property>
+		<property name="prop2" value="${service.prop2}"></property>
+		<property name="prop3" value="${service.prop3}"></property>
+		<property name="prop4" value="${service.prop4}"></property>
 	</bean>
 </beans>

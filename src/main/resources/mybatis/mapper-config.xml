@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 문서 유형 선언 -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd"> <!-- 여기에 정의되어 있는 태그를 사용하겠다 -->
+
+<!-- 루트 태그(엘리먼트) -->
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="com.mycompany.webapp.dto.Ch14Member" alias="member" />
+		<typeAlias type="com.mycompany.webapp.dto.Ch14Board" alias="board" />
+		<typeAlias type="com.mycompany.webapp.dto.Pager" alias="pager" />
+		<typeAlias type="com.mycompany.webapp.dto.Ch16Account" alias="account" />
+	</typeAliases>
+	
+</configuration>

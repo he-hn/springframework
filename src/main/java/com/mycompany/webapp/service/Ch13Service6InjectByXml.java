@@ -39,6 +39,7 @@ public class Ch13Service6InjectByXml {
 
 	public void setStr(String str) {
 		log.info("실행");
+		log.info(str);
 		this.str = str;
 	}
 

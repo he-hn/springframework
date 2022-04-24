@@ -9,7 +9,7 @@
 	<div class="card-body">
 		<form:form modelAttribute="member" method="post" action="form5">
 		  <div class="form-group">
-		    <label for="mid"><spring:message code="join.form.mid"/></label> <!-- 실제 태그 이름은 message 이다. spring은 접두사이다.   -->
+		    <label for="mid"><spring:message code="join.form.mid"/></label> <!-- 실제 태그 이름은 message 이다. spring은 국제화 사용을 위한 접두사이다. -->
 		    <form:input type="text" class="form-control" path="mid"/>
 		  </div>
 		  <div class="form-group">

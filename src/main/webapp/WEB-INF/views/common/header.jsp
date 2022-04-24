@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,17 +26,35 @@
 				<%-- <img src="<%=request.getContextPath()%>/resources/images/logo-spring.png" width="30" height="30" class="d-inline-block align-top"> Spring --%>
 			</a>
 			<div>
+				<%-- <a href="/webapp/ch08/login" class="btn btn-success btn-sm">로그인</a> 똑같다.--%>
+				<%--
 				<c:if test="${sessionMid == null}">
 					<a href="${pageContext.request.contextPath}/ch08/login" class="btn btn-success btn-sm">로그인</a>
-					<%-- <a href="/webapp/ch08/login" class="btn btn-success btn-sm">로그인</a> 위와 똑같다.--%>
 				</c:if>
 				
 				<c:if test="${sessionMid != null}">
 					<b class="text-white mr-2">User ID: ${sessionMid}</b>
 					<a href="${pageContext.request.contextPath}/ch08/logout" class="btn btn-success btn-sm">로그아웃</a>
 				</c:if>
+ 				--%>
+ 				
+ 				<sec:authorize access="isAnonymous()">
+ 					<a href="${pageContext.request.contextPath}/ch17/loginForm" class="btn btn-success btn-sm">로그인</a>
+ 				</sec:authorize>	
+ 				
+ 				<sec:authorize access="isAuthenticated()">
+ 					<b class="text-white mr-2">User-ID: <sec:authentication property="principal.username"/></b>
+ 					<%-- CSRF가 비활성화되어 있을 경우--%>
+ 					<%-- <a href="${pageContext.request.contextPath/logout}" class="btn btn-success btn-sm">로그아웃</a> --%>
+ 					<%-- CSRF가 활성화되어 있을 경우--%>
+ 					<form method="post" action="${pageContext.request.contextPath}/logout" class="d-inline-block">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <button class="btn btn-success btn-sm">Ch17 로그아웃</button>
+                    </form>
+ 				</sec:authorize>
 			</div>
-			
+ 			
+ 					
 		</nav>
 		<div class="container-fluid flex-grow-1">
 			<div class="row h-100">
